@@ -186,16 +186,16 @@ const Signup = () => {
                         rel="noreferrer"
                         className="underline"
                       >
-                        terms
+                        terms of use
                       </a>
-                      {" "} of use ,
+                      , {" "}
                       <a
                         href="https://kiwify.com.br/licenca-de-uso-software"
                         target="_blank"
                         rel="noreferrer"
                         className="underline"
                       >
-                        {" "} software licence terms
+                      software licence terms
                       </a>
                       , {" "}
                       <a
