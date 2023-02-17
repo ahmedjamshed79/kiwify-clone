@@ -20,27 +20,54 @@ const Signup = () => {
     console.log(formData);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
 
     // Perform validation checks
     const errors = {};
+    if (name === "email"  && !value) {
+      errors.email = "This field is mandatory";
+    } else if (name === "email" && !/\S+@\S+\.\S+/.test(value)) {
+      errors.email = "Please enter a valid email";
+    }
+    if (name === "re_email"  && !value) {
+      errors.re_email = "This field is mandatory";
+    } else if (name === "re_email" && !/\S+@\S+\.\S+/.test(value)) {
+      errors.re_email = "Please enter a valid email";
+    } else if (name === "re_email"  && value !== formData.email) {
+      errors.re_email = "The two emails must be the same";
+    }
+    if (name === "password"  && !value) {
+      errors.password = "This field is mandatory";
+    } else if (name === "password"  && value.length < 8) {
+      errors.password = "Password must be at least 8 characters long";
+    }
+    if (name === "terms_check"  && !value) {
+      errors.terms_check = "(This field is mandatory)";
+    }
+
+    // If there are errors, set the state and return
+    if (Object.keys(errors).length) {
+      setErrors(errors);
+    } else {
+      // Otherwise, clear the errors for this field
+      setErrors(prevErrors => ({ ...prevErrors, [name]: null }));
+    }
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    // Perform final validation check on submit
+    const errors = {};
     if (!formData.email) {
       errors.email = "This field is mandatory";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Please enter a valid email";
     }
     if (!formData.re_email) {
       errors.re_email = "This field is mandatory";
-    } else if (!/\S+@\S+\.\S+/.test(formData.re_email)) {
-      errors.re_email = "Please enter a valid email";
-    } else if (formData.re_email !== formData.email) {
-      errors.re_email = "The two emails must be the same";
     }
     if (!formData.password) {
       errors.password = "This field is mandatory";
-    } else if (formData.password.length < 8) {
-      errors.password = "Password must be at least 8 characters long";
     }
     if (!formData.terms_check) {
       errors.terms_check = "(This field is mandatory)";
@@ -53,7 +80,7 @@ const Signup = () => {
     }
 
     // Submit the form data
-    console.log("Submitting form data:", formData);
+    console.log('Submitting form data:', formData);
     setErrors({});
   };
 
@@ -98,6 +125,7 @@ const Signup = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className={`form-input block py-2 px-3 border ${
                       errors.email ? "border-red-500" : "border-gray-300"
                     } rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full`}
@@ -123,6 +151,7 @@ const Signup = () => {
                     name="re_email"
                     value={formData.re_email}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className={`form-input block py-2 px-3 border ${
                       errors.re_email ? "border-red-500" : "border-gray-300"
                     } rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full`}
@@ -149,6 +178,7 @@ const Signup = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className={`form-input block py-2 px-3 border ${
                       errors.password ? "border-red-500" : "border-gray-300"
                     } rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full`}
