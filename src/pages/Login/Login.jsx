@@ -1,7 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import kiwify_logo from "../../assets/kiwify-green-logo.png";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    console.log(formData);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Perform validation checks
+    const errors = {};
+    if (!formData.email) {
+      errors.email = "This field is mandatory";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "The email must be valid";
+    }
+    if (!formData.password) {
+      errors.password = "This field is mandatory";
+    } else if (formData.password.length < 8) {
+      errors.password = "Password must be at least 8 characters long";
+    }
+
+    // If there are errors, set the state and return
+    if (Object.keys(errors).length) {
+      setErrors(errors);
+      return;
+    }
+
+    // Submit the form data
+    console.log("Submitting form data:", formData);
+  };
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div>
@@ -27,11 +66,14 @@ const Login = () => {
         </div>
         {/* Login Form*/}
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <form className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <form
+            className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10"
+            onSubmit={handleSubmit}
+          >
             {/* Email*/}
             <div>
               <label
-                for="email"
+                htmlFor="email"
                 className="block text-sm font-medium leading-5 mb-1 text-gray-700"
               >
                 E-mail
@@ -39,18 +81,21 @@ const Login = () => {
               <div>
                 <input
                   type="text"
-                  autocomplete="username"
+                  autoComplete="username"
                   name="email"
-                  className="form-input block py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`form-input block py-2 px-3 border ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  } rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full`}
                 ></input>
-                <div className="text-red-500 text-xs mt-1">
-                  <div></div>
-                </div>
               </div>
               <div>
-                <div className="text-xs text-red-500">
-                  Esse campo é obrigatório
-                </div>
+                {errors.email && (
+                  <div className="text-xs text-red-500">
+                    {errors.email}
+                  </div>
+                )}
               </div>
             </div>
             {/* Pawwrord*/}
@@ -66,10 +111,18 @@ const Login = () => {
                   type="password"
                   autocomplete="current-password"
                   name="password"
-                  className="form-input block py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className={`form-input block py-2 px-3 border ${
+                    errors.password ? "border-red-500" : "border-gray-300"
+                  } rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full`}
                 ></input>
-                <div className="text-red-500 text-xs mt-1">
-                  <div>Esse campo é obrigatório</div>
+                <div>
+                  {errors.password && (
+                    <div className="text-red-500 text-xs mt-1">
+                      <div>{errors.password}</div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -88,7 +141,7 @@ const Login = () => {
             <div className="mt-6">
               <span className="block w-full rounded-md shadow-sm">
                 <button
-                  type="button"
+                  type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
                 >
                   To enter
