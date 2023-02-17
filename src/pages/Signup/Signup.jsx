@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import kiwify_logo from "../../assets/kiwify-green-logo.png";
 
-const Signup = () => {
+const Signup = (props) => {
   const [formData, setFormData] = useState({
     email: "",
     re_email: "",
@@ -55,6 +55,7 @@ const Signup = () => {
   };
 
   return (
+    <>
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div>
         {/* Logo and label */}
@@ -66,8 +67,9 @@ const Signup = () => {
           <p className="mt-2 text-center text-base leading-5 text-gray-600">
             Or &nbsp;
             <a
-              href="/login"
+              href="../Login/Login.jsx"
               className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+              onClick={()=>{props.handleChange("login")}}
             >
               log into your existing account
             </a>
@@ -217,6 +219,7 @@ const Signup = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

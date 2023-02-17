@@ -42,6 +42,7 @@ const Login = () => {
     console.log("Submitting form data:", formData);
   };
   return (
+    <>
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div>
         {/* logo and label*/}
@@ -152,6 +153,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
