@@ -33,7 +33,7 @@ function Accordion() {
             className="flex justify-between items-center cursor-pointer"
             onClick={() => toggleItem(index)}
           >
-            <span className="font-medium text-base">{item.title}</span>
+            <span className="font-medium text-sm sm:text-base">{item.title}</span>
             <svg
               className={`${
                 activeIndex === index ? "transform rotate-180" : ""
@@ -54,7 +54,7 @@ function Accordion() {
             </svg>
           </div>
           <div className={`${activeIndex === index ? "block" : "hidden"} mt-5`}>
-            <div className="text-gray text-base font-normal text-neutral-450">
+            <div className="text-gray text-sm sm:text-base font-normal text-neutral-450">
               {item.content}
             </div>
           </div>
