@@ -9,6 +9,10 @@ import icon_youtube from "../assets/icon_youtube.svg";
 import icon_arrow from "../assets/icon_arrow.svg";
 
 function Modal() {
+  const showSelection = (selection) => {
+    console.log(selection+" selected")
+  }
+
   return (
     <div className="fixed inset-0 overflow-y-auto z-30">
       <div className="flex inset-0 min-h-screen justify-center items-center bg-black">
@@ -22,7 +26,7 @@ function Modal() {
             </div>
           </div>
           <div className="flex w-full justify-between items-center mt-12 px-10">
-            <button className="bg-white w-32 h-40 p-5 rounded-xl hover:drop-shadow-2xl hover:text-cyan-450">
+            <button className="bg-white w-32 h-40 p-5 rounded-xl hover:drop-shadow-2xl hover:text-cyan-450" onClick={() => showSelection("Hubspot")}>
               <div className="flex flex-col">
                 <img className="w-2- h-20" src={icon_hubspot} alt="icon_hubspot" />
                 <label htmlFor="icon_hubspot" className="mt-4 cursor-pointer">
@@ -30,7 +34,7 @@ function Modal() {
                 </label>
               </div>
             </button>
-            <button className="bg-white w-32 h-40 p-5 rounded-xl hover:drop-shadow-2xl hover:text-cyan-450">
+            <button className="bg-white w-32 h-40 p-5 rounded-xl hover:drop-shadow-2xl hover:text-cyan-450"onClick={() => showSelection("Salesforce")}>
               <div className="flex flex-col">
                 <img className="w-2- h-20" src={icon_salesforce} alt="icon_salesforce" />
                 <label htmlFor="icon_salesforce" className="mt-4 cursor-pointer">
@@ -38,7 +42,7 @@ function Modal() {
                 </label>
               </div>
             </button>
-            <button className="bg-white w-32 h-40 p-5 rounded-xl hover:drop-shadow-2xl hover:text-cyan-450">
+            <button className="bg-white w-32 h-40 p-5 rounded-xl hover:drop-shadow-2xl hover:text-cyan-450"onClick={() => showSelection("Pipedrive")}>
               <div className="flex flex-col">
                 <img className="w-2- h-20" src={icon_pipedrive} alt="icon_pipedrive" />
                 <label htmlFor="icon_popedrive" className="mt-4 cursor-pointer">
@@ -46,7 +50,7 @@ function Modal() {
                 </label>
               </div>
             </button>
-            <button className="bg-white w-32 h-40 p-5 rounded-xl hover:drop-shadow-2xl hover:text-cyan-450">
+            <button className="bg-white w-32 h-40 p-5 rounded-xl hover:drop-shadow-2xl hover:text-cyan-450"onClick={() => showSelection("Copper")}>
               <div className="flex flex-col">
                 <img className="w-2- h-20" src={icon_copper} alt="icon_copper" />
                 <label htmlFor="icon_copper" className="mt-4 cursor-pointer">
