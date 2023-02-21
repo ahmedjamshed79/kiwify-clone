@@ -6,23 +6,24 @@ import Modal from "./modal/Modal";
 import { useState } from "react";
 
 function App() {
-  const [open, setIsOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
+  const openHandler = () => {
+    setOpen(true);
+  }
   const closeHandler = () => {
-    setIsOpen(false);
+    setOpen(false);
   }
   return (
-    // <Switch>
-    //   <Route exact path="/">
-    //     {<Signup />}
-    //   </Route>
-    //   <Route path="/login">
-    //     {<Login />}
-    //   </Route>
-    // </Switch>
-    
-    <Modal/>
-    
+    <Switch>
+      <Route exact path="/">
+        {<Signup openModal={openHandler}/>}
+        {open && <Modal closeModal={closeHandler}/>}
+      </Route>
+      <Route path="/login">
+        {<Login />}
+      </Route>
+    </Switch>
   );
 }
 

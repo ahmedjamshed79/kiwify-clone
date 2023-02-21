@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import kiwify_logo from "../../assets/kiwify-green-logo.png";
 import { Link } from "react-router-dom";
 
-const Signup = () => {
+const Signup = ({openModal}) => {
   const [formData, setFormData] = useState({
     email: "",
     re_email: "",
@@ -25,24 +25,24 @@ const Signup = () => {
 
     // Perform validation checks
     const errors = {};
-    if (name === "email"  && !value) {
+    if (name === "email" && !value) {
       errors.email = "This field is mandatory";
     } else if (name === "email" && !/\S+@\S+\.\S+/.test(value)) {
       errors.email = "Please enter a valid email";
     }
-    if (name === "re_email"  && !value) {
+    if (name === "re_email" && !value) {
       errors.re_email = "This field is mandatory";
     } else if (name === "re_email" && !/\S+@\S+\.\S+/.test(value)) {
       errors.re_email = "Please enter a valid email";
-    } else if (name === "re_email"  && value !== formData.email) {
+    } else if (name === "re_email" && value !== formData.email) {
       errors.re_email = "The two emails must be the same";
     }
-    if (name === "password"  && !value) {
+    if (name === "password" && !value) {
       errors.password = "This field is mandatory";
-    } else if (name === "password"  && value.length < 8) {
+    } else if (name === "password" && value.length < 8) {
       errors.password = "Password must be at least 8 characters long";
     }
-    if (name === "terms_check"  && !value) {
+    if (name === "terms_check" && !value) {
       errors.terms_check = "(This field is mandatory)";
     }
 
@@ -51,11 +51,11 @@ const Signup = () => {
       setErrors(errors);
     } else {
       // Otherwise, clear the errors for this field
-      setErrors(prevErrors => ({ ...prevErrors, [name]: null }));
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: null }));
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     // Perform final validation check on submit
@@ -80,13 +80,19 @@ const Signup = () => {
     }
 
     // Submit the form data
-    console.log('Submitting form data:', formData);
+    console.log("Submitting form data:", formData);
     setErrors({});
   };
 
   return (
     <>
       <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <button
+          className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+          onClick={openModal}
+        >
+          Open Modal
+        </button>
         <div>
           {/* Logo and label */}
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -209,7 +215,7 @@ const Signup = () => {
                   </div>
                   <div className="ml-2 text-sm leading-5">
                     <span className="font-medium text-gray-700">
-                      I have read and accept Kiwify's {" "}
+                      I have read and accept Kiwify's{" "}
                       <a
                         href="https://kiwify.com.br/termos-de-uso"
                         target="_blank"
@@ -218,16 +224,16 @@ const Signup = () => {
                       >
                         terms of use
                       </a>
-                      , {" "}
+                      ,{" "}
                       <a
                         href="https://kiwify.com.br/licenca-de-uso-software"
                         target="_blank"
                         rel="noreferrer"
                         className="underline"
                       >
-                      software licence terms
+                        software licence terms
                       </a>
-                      , {" "}
+                      ,{" "}
                       <a
                         href="https://kiwify.com.br/politica-de-conteudo"
                         target="_blank"

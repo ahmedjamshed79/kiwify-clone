@@ -8,20 +8,20 @@ import icon_hubspot from "../assets/icon_hubspot.svg";
 import icon_youtube from "../assets/icon_youtube.svg";
 import icon_arrow from "../assets/icon_arrow.svg";
 
-function Modal() {
+function Modal({closeModal}) {
   const showSelection = (selection) => {
     console.log(selection+" selected")
   }
 
   return (
-    <div className="fixed inset-0 overflow-y-auto z-30">
-      <div className="flex inset-0 min-h-screen justify-center items-center bg-black">
+    <div className="fixed inset-0 overflow-y-auto z-10">
+      <div className="flex inset-0 min-h-screen justify-center items-center bg-black/50">
         <div className="h-auto w-[40rem] bg-white rounded-2xl leading-8 text-neutral-800">
           <div className="flex justify-center items-center w-full px-10 mt-10">
             <div className="flex-1 text-center text-2xl font-medium">
               Extension
             </div>
-            <div className="flex-none cursor-pointer">
+            <div className="flex-none cursor-pointer" onClick={closeModal}>
               <img src={icon_close} alt="icon_close" />
             </div>
           </div>
